@@ -1,0 +1,91 @@
+{
+    "STC_referenceSlice": [],
+    "anatReference": {
+        "type": "T1w",
+        "session": ""
+    },
+    "contrastList": [],
+    "dataDir": "/Users/battal/Cerens_files/fMRI/Processed/RhythmCateg/Nonmetric/raw",
+    "derivativesDir": "/Users/battal/Cerens_files/fMRI/Processed/RhythmCateg/Nonmetric/derivatives/cpp_spm",
+    "dir": {
+        "raw": "",
+        "derivatives": "",
+        "stats": "/Users/battal/Cerens_files/fMRI/Processed/RhythmCateg/Nonmetric/derivatives/cpp_spm-stats"
+    },
+    "funcVoxelDims": [2.6,2.6,2.6],
+    "glm": {
+        "QA": {
+            "do": true
+        },
+        "roibased": {
+            "do": false
+        }
+    },
+    "groups": [""],
+    "jobsDir": "/Users/battal/Cerens_files/fMRI/Processed/RhythmCateg/Nonmetric/derivatives/cpp_spm/JOBS/Nonmetric",
+    "model": {
+        "file": "/Users/battal/Cerens_files/fMRI/Processed/RhythmCateg/Nonmetric/code/nonmetric_fMRI_analysis/src/../model/model-Nonmetric_smdl.json",
+        "hrfDerivatives": [0,0]
+    },
+    "parallelize": {
+        "do": true,
+        "killOnExit": true,
+        "nbWorkers": 3
+    },
+    "query": [],
+    "realign": {
+        "useUnwarp": true
+    },
+    "result": {
+        "Steps": {
+            "Contrasts": [
+                {
+                    "MC": "none",
+                    "Name": "AllCateg",
+                    "k": 0,
+                    "p": 0.001,
+                    "useMask": false
+                },
+                {
+                    "MC": "none",
+                    "Name": "CategA_gt_CategB",
+                    "k": 0,
+                    "p": 0.001,
+                    "useMask": []
+                },
+                {
+                    "MC": "none",
+                    "Name": "CategB_gt_CategA",
+                    "k": 0,
+                    "p": 0.001,
+                    "useMask": []
+                }
+            ],
+            "Level": "subject",
+            "Output": {
+                "NIDM_results": false,
+                "binary": true,
+                "csv": true,
+                "montage": {
+                    "background": "/Users/battal/Documents/MATLAB/spm12/canonical/avg152T1.nii,1",
+                    "do": true,
+                    "orientation": "axial",
+                    "slices": [-12,-8,-4,0,4,8,12,16,20,24,28,32,36,40,44,48,52,56,60]
+                },
+                "png": true,
+                "thresh_spm": true
+            }
+        }
+    },
+    "roiDir": "/Users/battal/Cerens_files/fMRI/Processed/RhythmCateg/Nonmetric/code/nonmetric_fMRI_analysis/src/../../../../RhythmCateg_ROI",
+    "skullstrip": {
+        "threshold": 0.75,
+        "mean": false
+    },
+    "sliceOrder": [0,0.9051,0.0603,0.9655,0.1206,1.0258,0.181,1.0862,0.2413,1.1465,0.3017,1.2069,0.362,1.2672,0.4224,1.3275,0.4827,1.3879,0.5431,1.4482,0.6034,1.5086,0.6637999999999999,1.5689,0.7241,1.6293,0.7844,1.6896,0.8448,0,0.9051,0.0603,0.9655,0.1206,1.0258,0.181,1.0862,0.2413,1.1465,0.3017,1.2069,0.362,1.2672,0.4224,1.3275,0.4827,1.3879,0.5431,1.4482,0.6034,1.5086,0.6637999999999999,1.5689,0.7241,1.6293,0.7844,1.6896,0.8448],
+    "space": "MNI",
+    "subjects": ["013"],
+    "taskName": "Nonmetric",
+    "useFieldmaps": true,
+    "zeropad": 2
+}

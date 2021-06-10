@@ -1,0 +1,57 @@
+{
+  "Name": "Nonmetric",
+  "Description": "contrasts for the nonmetric block design dataset",
+  "Input": {
+    "task": "Nonmetric"
+  },
+  "Steps": [
+    {
+      "Level": "run",
+      "Model": {
+        "X": [
+          "trial_type.block_simple",
+          "trial_type.block_nonmetric",
+          "trans_x", "trans_y", "trans_z", "rot_x", "rot_y", "rot_z"
+        ]
+      },
+      "AutoContrasts": [
+        "trial_type.block_simple",
+        "trial_type.block_nonmetric" ,
+        ]
+    },
+    {
+      "Level": "subject",
+      "AutoContrasts": ["trial_type.block_simple", "trial_type.block_nonmetric" ],
+      "Contrasts": [
+        {
+          "Name": "CategA_gt_CategB",
+          "ConditionList": [
+            "trial_type.block_simple", "trial_type.block_nonmetric"
+          ],
+          "weights": [1, -1],
+          "type": "t"
+        },
+        {
+          "Name": "CategB_gt_CategA",
+          "ConditionList": [
+            "trial_type.block_simple", "trial_type.block_nonmetric"
+          ],
+          "weights": [-1, 1],
+          "type": "t"
+        },
+        {
+          "Name": "AllCateg",
+          "ConditionList": [
+            "trial_type.block_simple", "trial_type.block_nonmetric"
+          ],
+          "weights": [0.5, 0.5],
+          "type": "t"
+        }
+      ]
+    },
+    {
+      "Level": "dataset",
+      "AutoContrasts": ["trial_type.block_simple", "trial_type.block_nonmetric", "CategA_gt_CategB", "CategB_gt_CategA","AllCateg"]
+    }
+  ]
+}
