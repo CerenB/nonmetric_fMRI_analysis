@@ -67,14 +67,14 @@ bidsFFX('contrasts', opt, funcFWHM);
 %
 
 %% MVPA - prep
-funcFWHM = 0;
+% funcFWHM = 0;
 % % bidsSmoothing(funcFWHM, opt);
 % %
 % % subject level univariate
 % bidsFFX('specifyAndEstimate', opt, funcFWHM);
 % bidsFFX('contrasts', opt, funcFWHM);
 % % prep for mvpa
-bidsConcatBetaTmaps(opt, funcFWHM, 0, 0);
+% bidsConcatBetaTmaps(opt, funcFWHM, 0, 0);
 % 
 % funcFWHM = 0;
 % % bidsSmoothing(funcFWHM, opt);
