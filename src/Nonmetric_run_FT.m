@@ -20,10 +20,10 @@ elseif strcmp(deblank(hostname), 'mac-114-168.local')
 end
 
 % add cpp repo
-run ../lib/CPP_BIDS_SPM_pipeline/initCppSpm.m;
+run ../lib/CPP_SPM/initCppSpm.m;
 
 % get all the parameters needed
-opt = getOptionBlock();
+opt = getOptionNonmetric();
 
 %% FFT analysis
 
