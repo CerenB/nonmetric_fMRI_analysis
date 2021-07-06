@@ -4,3 +4,6 @@
 [submodule "CPP_SPM"]
 	path = lib/CPP_SPM
 	url = https://github.com/cpp-lln-lab/CPP_SPM.git
+[submodule "lib/FFT_fMRI_analysis"]
+	path = lib/FFT_fMRI_analysis
+	url = https://github.com/CerenB/FFT_fMRI_analysis.git
