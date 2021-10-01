@@ -55,8 +55,8 @@ end
 %%
 % group analysis - for now only in MNI
 % individual space would require fsaverage
-opt.nStepsPerPeriod = 2;
-opt.FWHM = 2;
+opt.nStepsPerPeriod = 4;
+opt.FWHM = 6;
 opt = groupAverageSNR(opt);
 
 

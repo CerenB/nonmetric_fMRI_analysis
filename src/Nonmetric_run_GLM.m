@@ -58,9 +58,9 @@ bidsFFX('contrasts', opt, funcFWHM);
 % %bidsResults(opt, funcFWHM);
 %
 % % % group level univariate
-% % conFWHM = 8;
-% % bidsRFX('smoothContrasts', opt,funcFWHM, conFWHM);
-% % bidsRFX('RFX', opt, funcFWHM, conFWHM);
+conFWHM = 8;
+bidsRFX('smoothContrasts', opt,funcFWHM, conFWHM);
+bidsRFX('RFX', opt, funcFWHM, conFWHM);
 %
 % % WIP: group level results
 % % bidsResults(opt, FWHM);

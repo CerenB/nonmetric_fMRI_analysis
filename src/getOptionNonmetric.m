@@ -12,7 +12,8 @@ function opt = getOptionNonmetric()
   % group of subjects to analyze
   opt.groups = {''};
   % suject to run in each group
-  opt.subjects = {'014'}; 
+  opt.subjects = { '013', '014', '015', '016' ,'017', ...
+                   '018', '019', '020', '021', '023'}; 
   %'013', '014', '015', '016' ,'017', '018', '019'
   % '020', '021', '023'
 
