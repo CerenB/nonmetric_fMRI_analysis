@@ -28,29 +28,27 @@ opt = getOptionNonmetric();
 %% FFT analysis
 
 opt.anatMask = 0;
-opt.maskType = 'whole-brain'; 
+opt.maskType = 'whole-brain';
 [opt.funcMask, opt.maskType] = getMaskFile(opt);
 
-
-% opt.maskType = 'neurosynth'; 
+% opt.maskType = 'neurosynth';
 % opt.funcMask = getMaskFile(opt);
 
 % want to save each run FFT results
 opt.saveEachRun = 0;
 
 for iSmooth = [0 6]
-    
-    opt.FWHM = iSmooth; % 0 2 3 or 6mm smoothing
-    
-    % step size
-    opt.nStepsPerPeriod = 2;
-    % run fft
-    calculateSNR(opt);
-    
-    opt.nStepsPerPeriod = 4;
-    calculateSNR(opt);
-end
 
+  opt.FWHM = iSmooth; % 0 2 3 or 6mm smoothing
+
+  % step size
+  opt.nStepsPerPeriod = 2;
+  % run fft
+  calculateSNR(opt);
+
+  opt.nStepsPerPeriod = 4;
+  calculateSNR(opt);
+end
 
 %%
 % group analysis - for now only in MNI
@@ -58,8 +56,3 @@ end
 opt.nStepsPerPeriod = 4;
 opt.FWHM = 6;
 opt = groupAverageSNR(opt);
-
-
-
-
-

@@ -24,7 +24,6 @@ run ../lib/CPP_SPM/initCppSpm.m;
 % get all the parameters needed
 opt = getOptionNonmetric();
 
-
 %% Run batches
 reportBIDS(opt);
 bidsCopyRawFolder(opt, 1);
@@ -59,7 +58,7 @@ bidsFFX('contrasts', opt, funcFWHM);
 %
 % % % group level univariate
 conFWHM = 8;
-bidsRFX('smoothContrasts', opt,funcFWHM, conFWHM);
+bidsRFX('smoothContrasts', opt, funcFWHM, conFWHM);
 bidsRFX('RFX', opt, funcFWHM, conFWHM);
 %
 % % WIP: group level results
@@ -75,15 +74,15 @@ bidsRFX('RFX', opt, funcFWHM, conFWHM);
 % bidsFFX('contrasts', opt, funcFWHM);
 % % prep for mvpa
 % bidsConcatBetaTmaps(opt, funcFWHM, 0, 0);
-% 
+%
 % funcFWHM = 0;
 % % bidsSmoothing(funcFWHM, opt);
-% 
+%
 % % subject level univariate
 % bidsFFX('specifyAndEstimate', opt, funcFWHM);
 % bidsFFX('contrasts', opt, funcFWHM);
-% 
+%
 % % prep for mvpa
 % bidsConcatBetaTmaps(opt, funcFWHM, 0, 0);
-% 
+%
 % % strvcat(SPM.xX.name)

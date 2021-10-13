@@ -1,7 +1,7 @@
 % (C) Copyright 2020 Remi Gau, Marco Barilari
 
 function opt = getOptionNonmetric()
-    % opt = getOption()
+  % opt = getOption()
   % returns a structure that contains the options chosen by the user to run
   % slice timing correction, pre-processing, FFX, RFX.
 
@@ -12,13 +12,13 @@ function opt = getOptionNonmetric()
   % group of subjects to analyze
   opt.groups = {''};
   % suject to run in each group
-  opt.subjects = { '013', '014', '015', '016' ,'017', ...
-                   '018', '019', '020', '021', '023'}; 
-  %'013', '014', '015', '016' ,'017', '018', '019'
+  opt.subjects = { '013', '014', '015', '016', '017', ...
+                  '018', '019', '020', '021', '023'};
+  % '013', '014', '015', '016' ,'017', '018', '019'
   % '020', '021', '023'
 
-            % '001', '002', '003', '004', '005', ...
-             %   '006','007','008','009', '010', '011'
+  % '001', '002', '003', '004', '005', ...
+  %   '006','007','008','009', '010', '011'
   % Uncomment the lines below to run preprocessing
   % - don't use realign and unwarp
   opt.realign.useUnwarp = true;
@@ -35,10 +35,10 @@ function opt = getOptionNonmetric()
   % task to analyze
   opt.taskName = 'Nonmetric';
 
- %% set paths
+  %% set paths
   [~, hostname] = system('hostname');
   if strcmp(deblank(hostname), 'tux')
-    opt.dataDir = fullfile('/datadisk/data/RhythmCateg-fMRI/Nonmetric'); 
+    opt.dataDir = fullfile('/datadisk/data/RhythmCateg-fMRI/Nonmetric');
     opt.derivativesDir = fullfile( ...
                                   '/datadisk/data/RhythmCateg-fMRI/Nonmetric', ...
                                   'cpp_spm');
@@ -48,22 +48,21 @@ function opt = getOptionNonmetric()
                            '..', '..', '..', 'raw');
     opt.derivativesDir = fullfile(opt.dataDir, '..', ...
                                   'derivatives', 'cpp_spm');
-                              
+
     opt.roiDir = fullfile(fileparts(mfilename('fullpath')),  ...
-                           '..', '..', '..','..', 'RhythmCateg_ROI');
+                          '..', '..', '..', '..', 'RhythmCateg_ROI');
   end
 
   % Suffix output directory for the saved jobs
   opt.jobsDir = fullfile( ...
                          opt.dataDir, '..', 'derivatives', ...
                          'cpp_spm', 'JOBS', opt.taskName);
-                     
-  % specify the model file that contains the contrasts to compute
-    % univariate
-    opt.model.file =  ...
-        fullfile(fileparts(mfilename('fullpath')), '..', ...
-                 'model', 'model-Nonmetric_smdl.json');
 
+  % specify the model file that contains the contrasts to compute
+  % univariate
+  opt.model.file =  ...
+      fullfile(fileparts(mfilename('fullpath')), '..', ...
+               'model', 'model-Nonmetric_smdl.json');
 
   % to add the hrf temporal derivative = [1 0]
   % to add the hrf temporal and dispersion derivative = [1 1]
@@ -131,7 +130,6 @@ function opt = getOptionNonmetric()
                     1.3275, 0.4827, 1.3879, 0.5431, 1.4482, 0.6034, ...
                     1.5086, 0.6638, 1.5689, 0.7241, 1.6293, 0.7844, ...
                     1.6896, 0.8448];
-                
 
   opt.STC_referenceSlice = [];
 
@@ -146,6 +144,5 @@ function opt = getOptionNonmetric()
   %% DO NOT TOUCH
   opt = checkOptions(opt);
   saveOptions(opt);
-
 
 end
