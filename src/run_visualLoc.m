@@ -22,7 +22,7 @@ end
 run ../lib/CPP_SPM/initCppSpm.m;
 
 % get all the parameters needed
-opt = getOptionNonmetric();
+opt = getOption();
 
 %% Run batches
 reportBIDS(opt);
