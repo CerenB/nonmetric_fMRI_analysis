@@ -3,15 +3,8 @@ clc;
 
 %% set paths
 % set spm
-[~, hostname] = system('hostname');
 warning('off');
-
-if strcmp(deblank(hostname), 'tux')
-  addpath(genpath('/home/tomo/Documents/MATLAB/spm12'));
-elseif strcmp(deblank(hostname), 'mac-114-168.local')
-  warning('off');
-  addpath(genpath('/Users/battal/Documents/MATLAB/spm12'));
-end
+addpath(genpath('/Users/battal/Documents/MATLAB/spm12'));
 
 % bspm fmri
 % addpath(genpath('/Users/battal/Documents/MATLAB/bspmview'));
