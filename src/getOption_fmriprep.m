@@ -22,8 +22,8 @@ function opt = getOption_fmriprep()
 %   opt.space = 'MNI';
 
   % The directory where the data are located
-  opt.dataDir = fullfile(fileparts(mfilename('fullpath')), ...
-                         '..', '..', '..',  'raw');
+%   opt.dataDir = fullfile(fileparts(mfilename('fullpath')), ...
+%                          '..', '..', '..',  'raw');
 
                      
   opt.dir.raw = fullfile(fileparts(mfilename('fullpath')), ...

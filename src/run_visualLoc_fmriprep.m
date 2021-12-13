@@ -37,8 +37,3 @@ bidsResliceTpmToFunc(opt);
 % if you want to change add here e.g.
 % opt.fwhm.func = 2;
 bidsSmoothing(opt);
-
-%% 
-opt.pipeline.type = 'preproc';
-
-bidsSmoothing(opt);
