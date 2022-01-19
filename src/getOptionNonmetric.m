@@ -14,11 +14,7 @@ function opt = getOptionNonmetric()
   % suject to run in each group
   opt.subjects = { '013', '014', '015', '016', '017', ...
                   '018', '019', '020', '021', '023'};
-  % '013', '014', '015', '016' ,'017', '018', '019'
-  % '020', '021', '023'
 
-  % '001', '002', '003', '004', '005', ...
-  %   '006','007','008','009', '010', '011'
   % Uncomment the lines below to run preprocessing
   % - don't use realign and unwarp
   opt.realign.useUnwarp = true;
@@ -62,11 +58,8 @@ function opt = getOptionNonmetric()
   % univariate
   opt.model.file =  ...
       fullfile(fileparts(mfilename('fullpath')), '..', ...
-               'model', 'model-Nonmetric_smdl.json');
+               'model', 'model-NonmetricDecoding1_smdl.json');
 
-  % to add the hrf temporal derivative = [1 0]
-  % to add the hrf temporal and dispersion derivative = [1 1]
-  % opt.model.hrfDerivatives = [0 0];
 
   %% Specify the result to compute
   opt.result.Steps(1) = returnDefaultResultsStructure();
