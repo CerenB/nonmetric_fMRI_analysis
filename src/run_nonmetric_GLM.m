@@ -82,7 +82,7 @@ bidsSmoothing(funcFWHM, opt);
 bidsFFX('specifyAndEstimate', opt, funcFWHM);
 bidsFFX('contrasts', opt, funcFWHM);
 %
-% % prep for mvpa
-% bidsConcatBetaTmaps(opt, funcFWHM, 0, 0);
+% prep for mvpa
+bidsConcatBetaTmaps(opt, funcFWHM, 0, 0);
 %
 % % strvcat(SPM.xX.name)
