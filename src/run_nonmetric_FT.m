@@ -37,7 +37,7 @@ opt.maskType = 'whole-brain';
 % want to save each run FFT results
 opt.saveEachRun = 0;
 
-for iSmooth = [0 6]
+for iSmooth = 6
 
   opt.FWHM = iSmooth; % 0 2 3 or 6mm smoothing
 

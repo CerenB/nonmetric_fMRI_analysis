@@ -25,7 +25,7 @@ run ../lib/CPP_SPM/initCppSpm.m;
 opt = getOptionNonmetric();
 
 %% Run batches
-reportBIDS(opt);
+% reportBIDS(opt);
 bidsCopyRawFolder(opt, 1);
 
 % %
@@ -48,6 +48,9 @@ bidsFFX('specifyAndEstimate', opt, funcFWHM);
 bidsFFX('contrasts', opt, funcFWHM);
 %
 %
+
+bidsResults(opt, funcFWHM);
+
 % funcFWHM = 3;
 % bidsSmoothing(funcFWHM, opt);
 % bidsFFX('specifyAndEstimate', opt, funcFWHM);

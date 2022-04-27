@@ -12,8 +12,9 @@ function opt = getOptionNonmetric()
   % group of subjects to analyze
   opt.groups = {''};
   % suject to run in each group
-  opt.subjects = { '013', '014', '015', '016', '017', ...
-                  '018', '019', '020', '021', '023'};
+  opt.subjects = {'027'}; 
+  % '013', '014', '015', '016', '017', ...
+%                   '018', '019', '020', '021', '023'
 
   % Uncomment the lines below to run preprocessing
   % - don't use realign and unwarp
@@ -21,7 +22,7 @@ function opt = getOptionNonmetric()
 
   % we stay in native space (that of the T1)
   % - in "native" space: don't do normalization
-  opt.space = 'individual'; % 'individual', 'MNI'
+  opt.space = 'MNI'; % 'individual', 'MNI'
 
   % The directory where the data are located
   opt.dataDir = fullfile(fileparts(mfilename('fullpath')), ...
@@ -58,7 +59,7 @@ function opt = getOptionNonmetric()
   % univariate
   opt.model.file =  ...
       fullfile(fileparts(mfilename('fullpath')), '..', ...
-               'model', 'model-NonmetricDecoding1_smdl.json');
+               'model', 'model-Nonmetric_smdl.json'); % model-Nonmetric-pitch_smdl
 
 
   %% Specify the result to compute
