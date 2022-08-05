@@ -24,6 +24,9 @@ run ../lib/CPP_SPM/initCppSpm.m;
 % get all the parameters needed
 opt = getOptionNonmetric();
 
+% clean raw folder
+% omitSuffixOrganiseTsv(opt);
+
 %% Run batches
 % reportBIDS(opt);
 bidsCopyRawFolder(opt, 1);

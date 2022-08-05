@@ -11,8 +11,14 @@ function opt = getOptionNonmetric()
 
   % group of subjects to analyze
   opt.groups = {''};
+  opt.session = '001';
   % suject to run in each group
-  opt.subjects = {'027'}; 
+  opt.subjects = {'013', '014', '015', '016', '017', ...
+                  '018', '019', '020', '021', '023'}; 
+  
+  % 031 == 023, 032 == 007
+  % '024','025','026', '027','028' % 28 == 21
+  
   % '013', '014', '015', '016', '017', ...
 %                   '018', '019', '020', '021', '023'
 
@@ -59,7 +65,10 @@ function opt = getOptionNonmetric()
   % univariate
   opt.model.file =  ...
       fullfile(fileparts(mfilename('fullpath')), '..', ...
-               'model', 'model-Nonmetric_smdl.json'); % model-Nonmetric-pitch_smdl
+               'model', 'model-Nonmetric_smdl.json');
+%   opt.model.file =  ...
+%       fullfile(fileparts(mfilename('fullpath')), '..', ...
+%                'model', 'model-Nonmetric-OnlyPitch_smdl.json');
 
 
   %% Specify the result to compute
@@ -90,6 +99,16 @@ function opt = getOptionNonmetric()
   opt.result.Steps(1).Contrasts(3).MC =  'none';
   opt.result.Steps(1).Contrasts(3).p = 0.001;
   opt.result.Steps(1).Contrasts(3).k = 0;
+  
+  opt.result.Steps(1).Contrasts(4).Name = 'Nonmetric';
+  opt.result.Steps(1).Contrasts(4).MC =  'none';
+  opt.result.Steps(1).Contrasts(4).p = 0.001;
+  opt.result.Steps(1).Contrasts(4).k = 0;
+  
+  opt.result.Steps(1).Contrasts(5).Name = 'Simple';
+  opt.result.Steps(1).Contrasts(5).MC =  'none';
+  opt.result.Steps(1).Contrasts(5).p = 0.001;
+  opt.result.Steps(1).Contrasts(5).k = 0;
 
   % Specify how you want your output (all the following are on false by default)
   opt.result.Steps(1).Output.png = true();
@@ -101,7 +120,7 @@ function opt = getOptionNonmetric()
   opt.result.Steps(1).Output.binary = true();
 
   opt.result.Steps(1).Output.montage.do = true();
-  opt.result.Steps(1).Output.montage.slices = -12:4:60; % in mm -8:3:15;
+  opt.result.Steps(1).Output.montage.slices = 40:5:60; % in mm -8:3:15; % -12:4:60
   % axial is default 'sagittal', 'coronal'
   opt.result.Steps(1).Output.montage.orientation = 'axial';
 
@@ -114,16 +133,7 @@ function opt = getOptionNonmetric()
 
   % Options for slice time correction
 
-  opt.sliceOrder = [0, 0.9051, 0.0603, 0.9655, 0.1206, 1.0258, 0.181, ...
-                    1.0862, 0.2413, 1.1465, 0.3017, 1.2069, 0.362, ...
-                    1.2672, 0.4224, 1.3275, 0.4827, 1.3879, 0.5431, ...
-                    1.4482, 0.6034, 1.5086, 0.6638, 1.5689, 0.7241, ...
-                    1.6293, 0.7844, 1.6896, 0.8448, 0, 0.9051, 0.0603, ...
-                    0.9655, 0.1206, 1.0258, 0.181, 1.0862, 0.2413, ...
-                    1.1465, 0.3017, 1.2069, 0.362, 1.2672, 0.4224, ...
-                    1.3275, 0.4827, 1.3879, 0.5431, 1.4482, 0.6034, ...
-                    1.5086, 0.6638, 1.5689, 0.7241, 1.6293, 0.7844, ...
-                    1.6896, 0.8448];
+  opt.sliceOrder = [];
 
   opt.STC_referenceSlice = [];
 
