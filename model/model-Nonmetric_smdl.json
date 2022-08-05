@@ -46,6 +46,18 @@
           ],
           "weights": [0.5, 0.5],
           "type": "t"
+        },
+        {
+          "Name": "Simple",
+          "ConditionList": ["trial_type.block_simple"],
+          "weights": [1],
+          "type": "t"
+        },
+        {
+          "Name": "Nonmetric",
+          "ConditionList": ["trial_type.block_nonmetric"],
+          "weights": [1],
+          "type": "t"
         }
       ]
     },
