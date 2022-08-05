@@ -1,0 +1,48 @@
+{
+  "Name": "ModelOnlyPitch",
+  "Description": "contrasts for the rhythm block design dataset",
+  "Input": {
+    "task": "Nonmetric"
+  },
+  "Steps": [
+    {
+      "Level": "run",
+      "Model": {
+        "X": [
+          "trial_type.pitch_349",
+          "trial_type.pitch_440",
+          "trial_type.pitch_554",
+          "trial_type.pitch_698",
+          "trans_x", "trans_y", "trans_z", "rot_x", "rot_y", "rot_z"
+        ]
+      },
+      "AutoContrasts": [
+        "trial_type.pitch_349",
+        "trial_type.pitch_440",
+        "trial_type.pitch_554",
+        "trial_type.pitch_698",
+        ]
+    },
+    {
+      "Level": "subject",
+      "AutoContrasts": [
+                        "trial_type.pitch_349",
+                        "trial_type.pitch_440",
+                        "trial_type.pitch_554",
+                        "trial_type.pitch_698"],
+      "Contrasts": [ 
+        {
+          "Name": "AllPitch",
+          "ConditionList": [
+                        "trial_type.pitch_349",
+                        "trial_type.pitch_440",
+                        "trial_type.pitch_554",
+                        "trial_type.pitch_698"
+          ],
+          "weights": [0.25, 0.25, 0.25, 0.25],
+          "type": "t"
+        }
+      ]
+    }
+  ]
+}
