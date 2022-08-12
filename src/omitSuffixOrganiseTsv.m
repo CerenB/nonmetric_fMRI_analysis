@@ -8,6 +8,7 @@ bidsPath = '/Users/battal/Documents/GitHub/CPPLab/CPP_BIDS';
 addpath(genpath(fullfile(bidsPath, 'src')));
 addpath(genpath(fullfile(bidsPath, 'lib')));
 
+% opt.dataDir = '/Users/battal/Cerens_files/fMRI/Processed/RhythmCateg/RhythmBlock/raw';
 % The directory where the data are located
 for iSub = 1:length(opt.subjects)
     
