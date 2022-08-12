@@ -17,26 +17,13 @@ opt = getOptionNonmetric();
 % load the subjects/Groups information and the task name
 [BIDS, opt] = getData(opt);
 fprintf(1,'PROCESSING TASK: %s \n',opt.taskName)
-
-%which experiment, with or without pitch change?
-expType = 'no_pitch';
-expLabel = 2; %second exp(control)
-    
-% set output
-outputDir = [opt.derivativesDir,'-stats/group/task-Nonmetric_space-MNI_FWHM-6_MarsBar_roi'];
-if ~exist(outputDir,'dir')
-    mkdir(outputDir)
-end
-
-cd(outputDir);
-
+  
 %% set input
 % Degree of first level smoothing
 firstLevelSmoothing = 6 ;
 
 % radius of the sphere
-radius = 10;
-
+radius = 5;
                  
 % Grahn 2007 study MNI-space coordinates                    
 seedCoordinates = [
@@ -60,18 +47,33 @@ rois2Use = 1:10;
 seedCoordinates = seedCoordinates(rois2Use,:);
 roiNames = roiNames(rois2Use);
 
+% tapping info
+goodTapper = [1,2,5,7,8,9,10,12,14,15,16,21,25,27,28,30,32,33];
+% badTapper = [3,4,6,11,13,17,18,19,20,23,24,26,29,31];
+
 %% set output
+
+outputDir = [opt.derivativesDir,'-stats/group/task-',...
+                                opt.taskName, ...
+                                '_space-', opt.space, ...
+                                '_FWHM-', num2str(firstLevelSmoothing), ...
+                                '_MarsBar_roi'];
+if ~exist(outputDir,'dir')
+    mkdir(outputDir)
+end
+
+cd(outputDir);
 outputNameMat = fullfile(outputDir,...
                     [opt.taskName,...
                     '_GrahnCoord_Beta_GroupROIs_Smoothing',...
                     num2str(firstLevelSmoothing),...
                     '_Sphere',num2str(radius),'mm_', ...
-                    '.mat']);
+                    datestr(now, 'yyyymmddHHMM'), '.mat']);
 outputNameCsv = fullfile(outputDir,...
                     [opt.taskName,...
                     '_GrahnCoord_Beta_GroupROIs_Smoothing',...
                     num2str(firstLevelSmoothing),...
-                    '_Sphere',num2str(radius),'mm_',...
+                    '_Sphere',num2str(radius),'mm_', ...
                     datestr(now, 'yyyymmddHHMM'),'.csv']);              
                 
 % mat struc to save
@@ -94,11 +96,22 @@ for iSub = 1:length(opt.subjects) % for each subject
     subNumber = opt.subjects{iSub};   % Get the Subject ID
 
     %save experiment type info
-    if str2num(subNumber)>23
+    expType = 'no_pitch';
+    expLabel = 2; %second exp(control)
+
+    if str2double(subNumber)<=23
         expType = 'pitch_change';
         expLabel = 1;
     end
     
+    subType = 'badTapper';
+    subTypeLabel = 0;
+    % save good/bad tapper info
+    if ismember(str2double(subNumber),goodTapper)
+        subType = 'goodTapper';
+        subTypeLabel = 1;
+    end
+        
     fprintf(1,'PROCESSING SUBJECT No.: %i SUBJECT ID : %s \n',iSub,subNumber)
     
     for iRoi = 1:size(seedCoordinates,1)
@@ -178,6 +191,9 @@ for iSub = 1:length(opt.subjects) % for each subject
             result(c).indexS = indexBeta1;
             result(c).indexN = indexBeta2;
             result(c).expType = expType;
+            result(c).expLabel = expLabel;
+            result(c).subType = subType;
+            result(c).subTypeLabel = subTypeLabel;
             
             % see which betas to extract 
             BETAS1(iSub,iRoi) = beta1;     % b(1) = simple
