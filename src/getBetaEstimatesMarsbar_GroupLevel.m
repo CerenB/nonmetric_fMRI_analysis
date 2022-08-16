@@ -8,9 +8,6 @@ addpath(genpath('/Users/battal/Documents/MATLAB/spm12'));
 % add cpp repo
 run ../lib/CPP_SPM/initCppSpm.m;
 
-% start marsbar
-marsbar('on');
-
 % read subject info
 opt = getOptionNonmetric();
 

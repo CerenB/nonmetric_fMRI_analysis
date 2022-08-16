@@ -8,3 +8,7 @@
 *.mat
 
 src/cfg/
+
+src/.RData
+
+src/.Rhistory
