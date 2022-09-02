@@ -8,18 +8,18 @@ library(stringr)
 
 #######################################################
 
-# pathResults <- paste0('/Users/battal/Cerens_files/fMRI/Processed/RhythmCateg/',
-#                       'Nonmetric/derivatives/cpp_spm-stats/group/',
-#                       'task-Nonmetric_space-MNI_FWHM-6_MarsBar_roi/')
 pathResults <- paste0('/Users/battal/Cerens_files/fMRI/Processed/RhythmCateg/',
-                      'RhythmBlock/derivatives/cpp_spm-stats/group/',
-                      'task-RhythmBlock_space-MNI_FWHM-6_MarsBar_roi/')
+                      'Nonmetric/derivatives/cpp_spm-stats/group/',
+                      'task-Nonmetric_space-MNI_FWHM-6_MarsBar_roi/')
+# pathResults <- paste0('/Users/battal/Cerens_files/fMRI/Processed/RhythmCateg/',
+#                       'RhythmBlock/derivatives/cpp_spm-stats/group/',
+#                       'task-RhythmBlock_space-MNI_FWHM-6_MarsBar_roi/')
 
 ########
 
 betas <- NA
 
-dataNames = "^(.*Sphere10mm.*).csv$" # Sphere10mm Sphere5mm 
+dataNames = "^(.*Sphere5mm.*).csv$" # Sphere10mm Sphere5mm 
 temp = list.files(path = pathResults,pattern=dataNames)
 csvFileNb <- length(temp)     
 
@@ -65,8 +65,8 @@ condition2<- betas
 simple[,4] <- NULL
 condition2[,3] <- NULL
 simple$condition<-'simple'
-condition2$condition<-'complex' 
-# condition2$condition<-'nonmetric' 
+# condition2$condition<-'complex'
+condition2$condition<-'nonmetric'
 names(condition2)[3] <- 'beta'
 names(simple)[3] <- 'beta'
 betas<-rbind(simple,condition2)
@@ -140,7 +140,7 @@ jitter  = position_jitterdodge(0.2) # position_jitter(width=0.3)
 
 # color code:
 # trials: yellow: #fbb03b", purple: "#954af0", gray: "#8c8c8f"
-nonmetricGray = "#6B6B6B"
+nonmetricGray = "#3d8c55ff" # complex green= 3d8c55ff, nonmetricGrap = 6B6B6B
 simplePurple = "#8a4a95"
 shadedGray = '#c7c5c5'
 sharedPurple = '#938096'
@@ -169,8 +169,8 @@ df
 
 min(subsetbetas$beta)
 max(subsetbetas$beta)
-setlimit = c(-0.2,2) 
-setbreak = c(-0.5,0,0.5,1,1.5,2)
+setlimit = c(-0.3,3.5) 
+setbreak = c(-0.5,0,0.5,1,1.5,2, 2.5, 3)
 
 
 # Grouping according to pitch vs. no-pitch
@@ -204,7 +204,7 @@ fig
 
 
 ##### SAVE
-filename <- paste0(pathResults, 'BetaValues_pitch_', rois, '.png')
+filename <- paste0(pathResults, 'BetaValues_pitch_5mm_', rois, '.png')
 ggsave(filename, fig, dpi=300, width=5, height=2.5) # 1024 x 512 
 #ggsave(filename, fig, dpi=300, width=6, height=2.4)
 
@@ -215,8 +215,8 @@ ggsave(filename, fig, dpi=300, width=5, height=2.5) # 1024 x 512
 # 2. SMA preMotor - varying pitch vs. fixed pitch
 
 ########################
-setlimit = c(-0.5,1) 
-setbreak = c(-0.5,0,0.5, 1)
+setlimit = c(-0.5,2) 
+setbreak = c(-0.5,0,0.5, 1, 1.5)
 
 subsetbetas = subset(betas,roi_order >= 3 & roi_order < 7)
 rois = 'SMA_preMotor'
@@ -258,7 +258,7 @@ fig <- ggplot(data = subsetbetas,
 fig
 
 ###### save
-filename <- paste0(pathResults, 'BetaValues_pitch_', rois, '.png')
+filename <- paste0(pathResults, 'BetaValues_pitch_5mm_', rois, '.png')
 ggsave(filename, fig, dpi=300, width=10, height=2.5) # 1024 x 512 
 
 
@@ -278,8 +278,8 @@ df <- summarySE(data = subsetbetas,
                 measurevar='beta')
 df
 
-setlimit = c(-0.2,2) 
-setbreak = c(-0.5,0,0.5,1,1.5,2)
+setlimit = c(-0.3,3.5) 
+setbreak = c(-0.5,0,0.5,1,1.5,2, 2.5, 3)
 
 fig <- ggplot(data = subsetbetas, 
               aes(x = reorder(RoiExp, expLabel),
@@ -311,7 +311,7 @@ fig <- ggplot(data = subsetbetas,
   # theme(legend.title = element_blank())
 fig
 
-filename <- paste0(pathResults, 'BetaValues_NonmetricSimple_', rois, '.png')
+filename <- paste0(pathResults, 'BetaValues_NonmetricSimple_5mm_', rois, '.png')
 ggsave(filename, fig, dpi=300, width=5, height=2.75) # 1024 x 5xx 
 #ggsave(filename, fig, dpi=300, width=6, height=2.4)
 
@@ -324,8 +324,8 @@ ggsave(filename, fig, dpi=300, width=5, height=2.75) # 1024 x 5xx
 ################################################
 # grouping according to the exp conditions
 
-setlimit = c(-0.5,1.5) 
-setbreak = c(-0.5,0,0.5, 1, 1.5, 2)
+setlimit = c(-0.5,2) 
+setbreak = c(-0.5,0,0.5, 1, 1.5)
 
 subsetbetas = subset(betas,roi_order >= 3 & roi_order < 7)
 rois = 'SMA_preMotor'
@@ -363,7 +363,7 @@ fig <- ggplot(data = subsetbetas,
   theme(legend.position= "none")
 fig
 
-filename <- paste0(pathResults, 'BetaValues_NonmetricSimple_', rois, '.png')
+filename <- paste0(pathResults, 'BetaValues_NonmetricSimple_5mm_', rois, '.png')
 ggsave(filename, fig, dpi=300, width=10, height=2.5) # 1024 x 512 
 
 
@@ -481,8 +481,8 @@ ggsave(filename, fig, dpi=300, width=10, height=2.5) # 1024 x 512
 
 ################################################
 
-setlimit = c(-0.5,2) 
-setbreak = c(-0.5,0,0.5, 1 , 1.5, 2)
+setlimit = c(-0.5,3.2) 
+setbreak = c(-0.5,0,0.5, 1 , 1.5, 2, 2.5, 3)
 
 subsetbetas = subset(betas,expType == 'P4')
 rois = 'allROI'
@@ -525,9 +525,113 @@ fig <- ggplot(data = subsetbetas,
 fig
 
 
-filename <- paste0(pathResults, 'BetaValues_NonmetricSimple_', rois, '.png')
+filename <- paste0(pathResults, 'BetaValues_NonmetricSimple_5mm_', rois, '.png')
 ggsave(filename, fig, dpi=300, width=10, height=4) # 1024 x 512 
 
+
+
+
+
+
+################################################
+
+# ALL ROIs Together - Nonmetric vs. simple -- poster ICAC
+
+################################################
+
+# let's separate the roi and hemisphere
+betas$onlyroi <- sub('.', '', betas$roi)
+betas$onlyroi <- as.factor(betas$onlyroi)
+
+subsetbetas = subset(betas,expType == 'P4')
+
+head(subsetbetas)
+# WHAT TO DO NEXT:
+# add the conditions you use in the plotting in this aggregation 
+a <- subsetbetas
+#
+agg <- aggregate(a$beta, FUN = mean,
+                   by = list(sub = a$sub,
+                             subLabel = a$subLabel,
+                             expLabel = a$expLabel,
+                             subType = a$subType,
+                             condition = a$condition,
+                             onlyroi = a$onlyroi))
+names(agg)[7] <- 'beta'
+names(agg)[6] <- 'roi'
+
+# add roi order for plotting order
+agg$roi_order <-  ifelse(agg$roi == 'STG', 1,
+                            ifelse(agg$roi == 'SMA', 2, 
+                                   ifelse(agg$roi == 'preM', 3,
+                                          ifelse(agg$roi == 'puta', 4,5))))
+
+  
+# reassign back 
+
+# color code:
+nonmetricGray = "#6B6B6B" # complex green= 3d8c55ff, nonmetricGrap = 6B6B6B
+simplePurple = "#8a4a95"
+
+
+cond2 = 'Nonmetric'
+# cond2 = 'Complex'
+
+shapesize = 1.5
+shapetype = 21
+shapestroke = 1
+transparent = 1 #0.6
+jitter  = position_jitterdodge(0.2) # position_jitter(width=0.3)
+
+
+setlimit = c(-0.5,3) 
+setbreak = c(-0.5,0,1 , 2, 3)
+
+
+rois = 'allROI'
+
+df <- summarySE(data = agg, 
+                groupvars=c('roi_order','roi', 'condition'),
+                measurevar='beta')
+df
+
+min(agg$beta)
+max(agg$beta)
+
+fig <- ggplot(data = agg, 
+              aes(x = reorder(roi, roi_order),
+                  y = beta, 
+                  color = condition,
+                  group = condition)) +
+  geom_point(data=agg, 
+             aes(x = reorder(roi, roi_order), 
+                 y = beta), 
+             size = shapesize,
+             position = jitter, shape = shapetype, stroke = shapestroke) + 
+  stat_summary(aes(color = condition), fun=mean, fun.min = mean, fun.max = mean, geom="crossbar", size=0.6, width=0.6,position = position_dodge(width=.75)) +
+  theme_classic() +
+  geom_errorbar(data = df, 
+                aes(ymin = beta-se, ymax = beta+se, group = condition), 
+                color = 'black',size=0.5, width=0.15, alpha = transparent, position = position_dodge(width=.75)) +
+  ggtitle("") +
+  ylab("") +
+  xlab("") +
+  theme(axis.text.x=element_text(size=12, face = 'bold', angle=0, colour='black')) + # face = 'bold', 
+  theme(axis.text.y=element_text(size=12, angle=0, colour='black')) +
+  theme(axis.title.y=element_text(size=10, angle=90, colour='black')) +
+  scale_y_continuous(limits=setlimit, breaks=setbreak, position="left") +
+  scale_x_discrete(labels = NULL )+
+  scale_color_manual(name = '', labels = c(cond2, "Simple"),values=c(nonmetricGray, simplePurple)) + 
+  theme(legend.position= "none")
+  # theme(legend.position= c(.85, .85)) +
+  # theme(legend.text=element_text(size=8)) +
+  # theme(legend.title=element_text(size=9))
+fig
+
+
+filename <- paste0(pathResults, 'BetaValues_NonmetricSimple_5mm_poster_noHemis_', rois, '.png')
+# ggsave(filename, fig, dpi=300, width=15, height=6, units='cm') 
+ggsave(filename, fig, dpi=300, width=6, height=3) # 1024 x 512
 ###### STOPPED HERE FOR FIGURES:
 #### ADD A SEPARATION COLOR OR TEXTURE/shape  FOR GOOD VS. BAD TAPPERS
 ######

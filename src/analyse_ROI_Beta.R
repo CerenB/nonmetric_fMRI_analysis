@@ -15,17 +15,17 @@ library(lsmeans)
 library(afex)
 #######################################################
 
-# pathResults <- paste0('/Users/battal/Cerens_files/fMRI/Processed/RhythmCateg/',
-#                       'Nonmetric/derivatives/cpp_spm-stats/group/',
-#                       'task-Nonmetric_space-MNI_FWHM-6_MarsBar_roi/')
 pathResults <- paste0('/Users/battal/Cerens_files/fMRI/Processed/RhythmCateg/',
-                      'RhythmBlock/derivatives/cpp_spm-stats/group/',
-                      'task-RhythmBlock_space-MNI_FWHM-6_MarsBar_roi/')
+                      'Nonmetric/derivatives/cpp_spm-stats/group/',
+                      'task-Nonmetric_space-MNI_FWHM-6_MarsBar_roi/')
+# pathResults <- paste0('/Users/battal/Cerens_files/fMRI/Processed/RhythmCateg/',
+#                       'RhythmBlock/derivatives/cpp_spm-stats/group/',
+#                       'task-RhythmBlock_space-MNI_FWHM-6_MarsBar_roi/')
 ########
 
 betas <- NA
 
-dataNames = "^(.*Sphere10mm.*).csv$" # Sphere10mm Sphere5mm 
+dataNames = "^(.*Sphere5mm.*).csv$" # Sphere10mm Sphere5mm 
 temp = list.files(path = pathResults,pattern=dataNames)
 csvFileNb <- length(temp)     
 
@@ -66,15 +66,16 @@ betas$hemis <- ifelse((betas$roi_order %% 2) == 1, 'left', 'right')
 
 # split and combine data so we have 1 column only for betas
 simple <- betas
-nonmetric<- betas
+condition2<- betas
 
 simple[,4] <- NULL
-nonmetric[,3] <- NULL
+condition2[,3] <- NULL
 simple$condition<-'simple'
-nonmetric$condition<-'nonmetric'
-names(nonmetric)[3] <- 'beta'
+condition2$condition<-'complex' 
+# condition2$condition<-'nonmetric' 
+names(condition2)[3] <- 'beta'
 names(simple)[3] <- 'beta'
-betas<-rbind(simple,nonmetric)
+betas<-rbind(simple,condition2)
 
 ##### control point
 
@@ -142,22 +143,6 @@ betas$onlyroi <- as.factor(betas$onlyroi)
 betasP4 <- subset(betas, expType =='P4')
 betasP1 <- subset(betas, expType =='P1')
 
-
-my.anova <- ezANOVA(data=betasP1, 
-                    dv=.(beta), 
-                    wid=.(subLabel), 
-                    within =.(condition, onlyroi, hemis), 
-                    detailed=TRUE, 
-                    type=3)
-my.anova
-
-my.anova <- ezANOVA(data=betasP4, 
-                    dv=.(beta), 
-                    wid=.(subLabel), 
-                    within =.(condition, onlyroi, hemis), 
-                    detailed=TRUE, 
-                    type=3)
-my.anova
 
 
 # separate the ROIs for 2 separate ANOVAs 
@@ -244,7 +229,7 @@ anova_out(stg)
 
 ##########
 
-#### RUN STATS ON EACH ROI SEPARATELY with LMM - maybe P1 and P4 can be modelled together 
+#### RUN STATS ON EACH ROI SEPARATELY with LMM - maybe P1 and P4 can be modeled together 
 # checking NONMETRIC !== SIMPLE? 
 
 #########################################
@@ -353,16 +338,16 @@ m1
 # only roi sig.
 
 # let's look at specific roi
-agg.roi<-subset(agg, onlyroi=='STG')
+# agg.roi<-subset(agg, onlyroi=='STG')
 # agg.roi<-subset(agg, onlyroi=='SMA')
 # agg.roi<-subset(agg, onlyroi=='preM')
 # agg.roi<-subset(agg, onlyroi=='puta')
-# agg.roi<-subset(agg, onlyroi=='cereb')
+agg.roi<-subset(agg, onlyroi=='cereb')
 
 m1 <- mixed(beta ~  condition * subType + (1|subLabel), data = agg.roi)
 m1
 
-# nothing sig. 
+# nothing sig. beside cereb ROI, condition is sig in complex vs. simple 
 
 
 
