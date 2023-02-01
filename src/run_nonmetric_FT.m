@@ -29,10 +29,15 @@ opt = getOptionNonmetric();
 
 opt.anatMask = 0;
 opt.maskType = 'whole-brain';
-[opt.funcMask, opt.maskType] = getMaskFile(opt);
+% % % WIP % % % 
+% [opt.funcMask, opt.maskType] = getMaskFile(opt);
+[opt] = getMaskFile(opt);
 
 % opt.maskType = 'neurosynth';
 % opt.funcMask = getMaskFile(opt);
+
+% not sure why we added this option, but 
+opt.calculateAverage = 1;
 
 % want to save each run FFT results
 opt.saveEachRun = 0;
@@ -53,6 +58,6 @@ end
 %%
 % group analysis - for now only in MNI
 % individual space would require fsaverage
-opt.nStepsPerPeriod = 4;
-opt.FWHM = 6;
+opt.nStepsPerPeriod = 2;
+opt.FWHM = 0; %0 2 6 
 opt = groupAverageSNR(opt);

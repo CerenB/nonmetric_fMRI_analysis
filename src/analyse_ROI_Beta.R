@@ -15,12 +15,12 @@ library(lsmeans)
 library(afex)
 #######################################################
 
-pathResults <- paste0('/Users/battal/Cerens_files/fMRI/Processed/RhythmCateg/',
-                      'Nonmetric/derivatives/cpp_spm-stats/group/',
-                      'task-Nonmetric_space-MNI_FWHM-6_MarsBar_roi/')
 # pathResults <- paste0('/Users/battal/Cerens_files/fMRI/Processed/RhythmCateg/',
-#                       'RhythmBlock/derivatives/cpp_spm-stats/group/',
-#                       'task-RhythmBlock_space-MNI_FWHM-6_MarsBar_roi/')
+#                       'Nonmetric/derivatives/cpp_spm-stats/group/',
+#                       'task-Nonmetric_space-MNI_FWHM-6_MarsBar_roi/')
+pathResults <- paste0('/Users/battal/Cerens_files/fMRI/Processed/RhythmCateg/',
+                      'RhythmBlock/derivatives/cpp_spm-stats/group/',
+                      'task-RhythmBlock_space-MNI_FWHM-6_MarsBar_roi/')
 ########
 
 betas <- NA

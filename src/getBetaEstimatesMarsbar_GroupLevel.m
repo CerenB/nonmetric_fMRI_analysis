@@ -20,27 +20,36 @@ fprintf(1,'PROCESSING TASK: %s \n',opt.taskName)
 firstLevelSmoothing = 6 ;
 
 % radius of the sphere
-radius = 5;
-                 
-% Grahn 2007 study MNI-space coordinates                    
+radius = 10;
+
+% RhythmBlock- AllRhythm vs. Silence MNI-space coordinates                    
 seedCoordinates = [
-   -9	6	60   % Left  pre-SMA/SMA
-   3	6	66   % Right pre-SMA/SMA
-   -54	0	51   % Left premotor
-   54	0	45   % Right premotor
-   -24	6	9    % Left  putamen
-   21	6	9    % Right putamen
-   -30	-66	-24  % Left cerebellum
-   30	-66	-27  % Right cerebellum
-   -57	-15	9    % Left STG
-   60	-33	6    % Right STG
+   -3	0	63   % pre-SMA/SMA
+   -55	-5	52   % Left premotor, lpreM
+   52	0	44   % Right premotor
+   29	-60	-28  % cerebellum
+   -42	-31	11    % Left STG
+   55	-5	0    % Right STG
      ];
  
+% % Grahn 2007 study MNI-space coordinates                    
+% seedCoordinates = [
+%    -9	6	60   % Left  pre-SMA/SMA
+%    3	6	66   % Right pre-SMA/SMA
+%    -54	0	51   % Left premotor
+%    54	0	45   % Right premotor
+%    -24	6	9    % Left  putamen
+%    21	6	9    % Right putamen
+%    -30	-66	-24  % Left cerebellum
+%    30	-66	-27  % Right cerebellum
+%    -57	-15	9    % Left STG
+%    60	-33	6    % Right STG
+%      ];
+ 
     
-roiNames = {'lSMA','rSMA','lpreM','rpreM','lputa','rputa', ...
-            'lcereb', 'rcereb', 'lSTG', 'rSTG'};
+roiNames = {'SMA','lpreM','rpreM', 'cereb', 'lSTG', 'rSTG'};
 
-rois2Use = 1:10;
+rois2Use = 1:6;
 seedCoordinates = seedCoordinates(rois2Use,:);
 roiNames = roiNames(rois2Use);
 
@@ -50,7 +59,7 @@ goodTapper = [1,2,5,7,8,9,10,12,14,15,16,21,25,27,28,30,32,33];
 
 %% set output
 
-outputDir = [opt.derivativesDir,'-stats/group/task-',...
+outputDir = [opt.dir.stats,'/group/task-',...
                                 opt.taskName, ...
                                 '_space-', opt.space, ...
                                 '_FWHM-', num2str(firstLevelSmoothing), ...
@@ -62,13 +71,13 @@ end
 cd(outputDir);
 outputNameMat = fullfile(outputDir,...
                     [opt.taskName,...
-                    '_GrahnCoord_Beta_GroupROIs_Smoothing',...
+                    '_AllRhythmvsSilenceCoord_Beta_GroupROIs_Smoothing',...
                     num2str(firstLevelSmoothing),...
                     '_Sphere',num2str(radius),'mm_', ...
                     datestr(now, 'yyyymmddHHMM'), '.mat']);
 outputNameCsv = fullfile(outputDir,...
                     [opt.taskName,...
-                    '_GrahnCoord_Beta_GroupROIs_Smoothing',...
+                    '_AllRhythmvsSilenceCoord_Beta_GroupROIs_Smoothing',...
                     num2str(firstLevelSmoothing),...
                     '_Sphere',num2str(radius),'mm_', ...
                     datestr(now, 'yyyymmddHHMM'),'.csv']);              
@@ -141,6 +150,10 @@ for iSub = 1:length(opt.subjects) % for each subject
             % Make marsbar design object
             D  = mardo(spmFile);
             D  = mardo(SPM);
+            
+            % correcting/updating the path for images
+            D = cd_images(D, [opt.dir.derivatives,'/sub-', subNumber, '/ses-001/func/']);
+            save_spm(D);
             
             % Set fmristat AR modelling
             % http://marsbar.sourceforge.net/faq.html#fmristat
